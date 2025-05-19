@@ -2,6 +2,7 @@ using System.Text.Json.Serialization;
 using Microsoft.EntityFrameworkCore;
 using OrderQueueSystem.Context;
 using OrderQueueSystem.Mapper;
+using OrderQueueSystem.Middlewares;
 using OrderQueueSystem.Repositories;
 using OrderQueueSystem.Services;
 
@@ -17,7 +18,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 
-string sqlServerConnection = builder.Configuration.GetConnectionString("DefaultConnection");
+string sqlServerConnection = builder.Configuration.GetConnectionString("DefaultConnection")!;
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(sqlServerConnection));
 
 builder.Services.AddScoped<IPedidoRepository, PedidoRepository>();
@@ -35,6 +36,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseMiddleware<ExceptionMiddleware>();
 
 app.UseHttpsRedirection();
 
