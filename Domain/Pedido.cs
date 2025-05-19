@@ -17,6 +17,4 @@ public class Pedido
     public bool Processado { get; set; } = false;
 
 
-
-
 }

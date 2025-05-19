@@ -23,7 +23,9 @@ builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(sqlS
 
 builder.Services.AddScoped<IPedidoRepository, PedidoRepository>();
 builder.Services.AddScoped<IPedidoService, PedidoService>();
+builder.Services.AddScoped<EmailService>();
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+builder.Services.AddHostedService<PedidoBackgroundService>();
 
 builder.Services.AddAutoMapper(typeof(DtoMappingProfile));
 
