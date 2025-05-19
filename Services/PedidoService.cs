@@ -3,7 +3,9 @@ using AutoMapper;
 using OrderQueueSystem.Context;
 using OrderQueueSystem.Domain;
 using OrderQueueSystem.Dtos;
+using OrderQueueSystem.Exceptions;
 using OrderQueueSystem.Repositories;
+using OrderQueueSystem.Utils;
 
 namespace OrderQueueSystem.Services;
 
@@ -25,6 +27,7 @@ public class PedidoService : IPedidoService
     {
         _logger.LogInformation($"Buscando pedido com Id: {id}");
         var pedido =  await _repository.GetByIdAsync(id);
+        if (pedido is null) throw new PedidoNaoEncontradoException(BusinessUtils.PEDIDO_EXCEPTION_MESSAGE);
         return _mapper.Map<PedidoResponseDto>(pedido);
     }
 

@@ -14,6 +14,8 @@ public class Pedido
 
     public DateTime Data { get; set; }
 
+    public bool Processado { get; set; } = false;
+
 
 
 
