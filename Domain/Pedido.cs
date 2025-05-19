@@ -1,9 +1,19 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace OrderQueueSystem.Domain;
 
 [Table("tb_pedidos")]
 public class Pedido
 {
-    public int Id;
+    public int Id { get; set; }
+
+    [Required]
+    public string Email { get; set; }
+
+    public DateTime Data { get; set; }
+
+
+
+
 }
